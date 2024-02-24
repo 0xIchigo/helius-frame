@@ -13,10 +13,12 @@ export async function POST(req: NextRequest): Promise<Response> {
     });
 
     if (isValid && message.interactor.verified_addresses.sol_addresses) {
-        const solanaAddresses = message.interactor.verified_addresses.sol_addresses; 
+        const solanaAddresses = message.interactor.verified_addresses.sol_addresses;
+        console.log(`SOLANA ADDRESSES: ${solanaAddresses}`); 
 
         if (solanaAddresses) {
             try {
+                console.log(`MINTING to ${solanaAddresses[0]}`);
                 const mintResult = await mintCompressedNFT(solanaAddresses[0]!);
                 return new NextResponse(getFrameHtmlResponse({
                     image: {
@@ -34,6 +36,7 @@ export async function POST(req: NextRequest): Promise<Response> {
                     ],
                 }));
             } catch (e) {
+                console.log(`Minting failed: ${e}`);
                 return new NextResponse(getFrameHtmlResponse({
                     image: {
                         src: `${baseURL}/error.jpg`
@@ -48,6 +51,7 @@ export async function POST(req: NextRequest): Promise<Response> {
                 }));
             }
         } else {
+            console.log(`No Solana address found`);
             return new NextResponse(getFrameHtmlResponse({
                 image: {
                     src: `${baseURL}/error.jpg`
