@@ -1,5 +1,7 @@
+const url = `https://mainnet.helius-rpc.com/?api-key=${process.env.HELIUS_API_KEY}`;
+
 export const mintCompressedNFT = async (address: string) => {
-    const response = await fetch(process.env.NEXT_HELIUS_API_KEY!, {
+    const response = await fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
