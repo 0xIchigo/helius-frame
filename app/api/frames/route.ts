@@ -63,6 +63,7 @@ export async function POST(req: NextRequest): Promise<Response> {
             }));
         }
     } else if (message?.interactor.verified_accounts.length === 0){
+        console.log(JSON.stringify(message?.interactor, null, 2));
         return new NextResponse(getFrameHtmlResponse({
             image: {
                 src: `${baseURL}/error.jpg`
