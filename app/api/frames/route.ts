@@ -12,6 +12,8 @@ export async function POST(req: NextRequest): Promise<Response> {
         neynarApiKey: "NEYNAR_ONCHAIN_KIT",
     });
 
+    console.log(JSON.stringify(message, null, 2));
+
     if (isValid && message.interactor.verified_addresses.sol_addresses) {
         const solanaAddresses = message.interactor.verified_addresses.sol_addresses;
         console.log(`SOLANA ADDRESSES: ${solanaAddresses}`); 
