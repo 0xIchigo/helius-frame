@@ -73,7 +73,7 @@ export async function POST(req: NextRequest): Promise<Response> {
                   action: "post",
                 },
                 {
-                    label: `${message?.interactor}`,
+                    label: `${JSON.stringify(message?.interactor, null, 2)}`,
                 },
             ],
             postUrl: `${baseURL}api/frames`,
