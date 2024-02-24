@@ -72,6 +72,9 @@ export async function POST(req: NextRequest): Promise<Response> {
                   label: "No verified addresses found. Retry?",
                   action: "post",
                 },
+                {
+                    label: `${message?.interactor}`,
+                },
             ],
             postUrl: `${baseURL}api/frames`,
         }));
