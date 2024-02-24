@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { getFrameMetadata } from "@coinbase/onchainkit";
 
+const baseURL = "https://helius-frame.vercel.app/";
+
 const frameMetadata = getFrameMetadata({
   image: {
-    src: "/default.jpg",
+    src: `${baseURL}/default.jpg`,
     aspectRatio: "1.91:1",
   },
   buttons: [
@@ -12,7 +14,7 @@ const frameMetadata = getFrameMetadata({
       action: "post",
     },
   ],
-  postUrl: `/api/frames/route`,
+  postUrl: `${baseURL}/api/frames/route`,
 });
 
 export const metadata: Metadata = {
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mint a cNFT on Solana",
     description: "Mint a cNFT to your verified Solana address using the Helius Mint API",
-    images: [`${process.env.NEXT_PUBLIC_URL}/default.jpg`],
+    images: ["https://helius-frame.vercel.app/default.jpg"],
   },
   other: {
     ...frameMetadata,

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse} from "next/server";
 import { getFrameMessage, getFrameHtmlResponse } from "@coinbase/onchainkit/frame";
 import { mintCompressedNFT } from "../../utils/mint";
 
+const baseURL = "https://helius-frame.vercel.app/";
+
 export async function POST(req: NextRequest): Promise<Response> {
     const body = await req.json();
 
@@ -19,7 +21,7 @@ export async function POST(req: NextRequest): Promise<Response> {
                 const mintResult = await mintCompressedNFT(firstSolanaAddress);
                 return new NextResponse(getFrameHtmlResponse({
                     image: {
-                        src: `${process.env.NEXT_PUBLIC_URL}/success.jpg`
+                        src: `${baseURL}/success.jpg`
                     },
                     buttons: [
                         {
@@ -35,7 +37,7 @@ export async function POST(req: NextRequest): Promise<Response> {
             } catch (e) {
                 return new NextResponse(getFrameHtmlResponse({
                     image: {
-                        src: `${process.env.NEXT_PUBLIC_URL}/error.jpg`
+                        src: `${baseURL}/error.jpg`
                     },
                     ogTitle: `Minting failed`,
                 }));
@@ -43,7 +45,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         } else {
             return new NextResponse(getFrameHtmlResponse({
                 image: {
-                    src: `${process.env.NEXT_PUBLIC_URL}/error.jpg`
+                    src: `${baseURL}/error.jpg`
                 },
                 ogTitle: "No Solana address found",
             }));
@@ -51,14 +53,14 @@ export async function POST(req: NextRequest): Promise<Response> {
     } else if (message?.interactor.verified_accounts.length === 0){
         return new NextResponse(getFrameHtmlResponse({
             image: {
-                src: `${process.env.NEXT_PUBLIC_URL}/error.jpg`
+                src: `${baseURL}/error.jpg`
             },
             ogTitle: "No verified addresses found",
         }));
     } else {
         return new NextResponse(getFrameHtmlResponse({
             image: {
-                src: `${process.env.NEXT_PUBLIC_URL}/error.jpg`
+                src: `${baseURL}/error.jpg`
             }, 
             ogTitle: "Invalid frame message",
         }));
