@@ -32,6 +32,17 @@ export const mintCompressedNFT = async (address: string) => {
         }),
     });
 
-    const { result } = await response.json();
-    return result;
+    const data = await response.json();
+    console.log(`data: ${JSON.stringify(data, null, 2)}`);
+
+    if (!response.ok) {
+        throw new Error(`The response was not okay - ${response.status}`);
+    }
+
+    if (!data.result || !data.result.assetId) {
+        throw new Error(`The response did not include the expected data.result.assetId field`);
+    }
+
+
+    return data.result;
 };
