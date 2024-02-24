@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mint a cNFT on Solana",
     description: "Mint a cNFT to your verified Solana address using the Helius Mint API",
-    images: ["/default.jpg"],
+    images: [`${process.env.NEXT_PUBLIC_URL}/default.jpg`],
   },
   other: {
     ...frameMetadata,

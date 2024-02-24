@@ -19,7 +19,7 @@ export async function POST(req: NextRequest): Promise<Response> {
                 const mintResult = await mintCompressedNFT(firstSolanaAddress);
                 return new NextResponse(getFrameHtmlResponse({
                     image: {
-                        src: "/success.jpg"
+                        src: `${process.env.NEXT_PUBLIC_URL}/success.jpg`
                     },
                     buttons: [
                         {
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest): Promise<Response> {
             } catch (e) {
                 return new NextResponse(getFrameHtmlResponse({
                     image: {
-                        src: "/error.jpg"
+                        src: `${process.env.NEXT_PUBLIC_URL}/error.jpg`
                     },
                     ogTitle: `Minting failed`,
                 }));
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         } else {
             return new NextResponse(getFrameHtmlResponse({
                 image: {
-                    src: "/error.jpg"
+                    src: `${process.env.NEXT_PUBLIC_URL}/error.jpg`
                 },
                 ogTitle: "No Solana address found",
             }));
@@ -51,14 +51,14 @@ export async function POST(req: NextRequest): Promise<Response> {
     } else if (message?.interactor.verified_accounts.length === 0){
         return new NextResponse(getFrameHtmlResponse({
             image: {
-                src: "/error.jpg"
+                src: `${process.env.NEXT_PUBLIC_URL}/error.jpg`
             },
             ogTitle: "No verified addresses found",
         }));
     } else {
         return new NextResponse(getFrameHtmlResponse({
             image: {
-                src: "/error.jpg"
+                src: `${process.env.NEXT_PUBLIC_URL}/error.jpg`
             }, 
             ogTitle: "Invalid frame message",
         }));
