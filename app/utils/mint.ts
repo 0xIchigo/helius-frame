@@ -1,4 +1,4 @@
-const url = `https://mainnet.helius-rpc.com/?api-key=${process.env.HELIUS_API_KEY}`;
+const url = `https://dorree-lf3bjr-fast-mainnet.helius-rpc.com/`;
 
 export const mintCompressedNFT = async (address: string) => {
     const response = await fetch(url, {
