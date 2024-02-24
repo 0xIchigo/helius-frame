@@ -39,7 +39,13 @@ export async function POST(req: NextRequest): Promise<Response> {
                     image: {
                         src: `${baseURL}/error.jpg`
                     },
-                    ogTitle: `Minting failed`,
+                    buttons: [
+                        {
+                          label: "Minting failed. Retry?",
+                          action: "post",
+                        },
+                    ],
+                    postUrl: `${baseURL}api/frames`,
                 }));
             }
         } else {
@@ -47,7 +53,13 @@ export async function POST(req: NextRequest): Promise<Response> {
                 image: {
                     src: `${baseURL}/error.jpg`
                 },
-                ogTitle: "No Solana address found",
+                buttons: [
+                    {
+                      label: "No Solana address found. Retry?",
+                      action: "post",
+                    },
+                ],
+                postUrl: `${baseURL}api/frames`
             }));
         }
     } else if (message?.interactor.verified_accounts.length === 0){
@@ -55,14 +67,26 @@ export async function POST(req: NextRequest): Promise<Response> {
             image: {
                 src: `${baseURL}/error.jpg`
             },
-            ogTitle: "No verified addresses found",
+            buttons: [
+                {
+                  label: "No verified addresses found. Retry?",
+                  action: "post",
+                },
+            ],
+            postUrl: `${baseURL}api/frames`,
         }));
     } else {
         return new NextResponse(getFrameHtmlResponse({
             image: {
                 src: `${baseURL}/error.jpg`
             }, 
-            ogTitle: "Invalid frame message",
+            buttons: [
+                {
+                  label: "Invalid frame message. Retry?",
+                  action: "post",
+                },
+            ],
+            postUrl: `${baseURL}api/frames`,
         }));
     }
 }
