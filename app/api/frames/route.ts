@@ -14,7 +14,20 @@ export async function POST(req: NextRequest): Promise<Response> {
 
     console.log(JSON.stringify(message, null, 2));
 
-    if (isValid && message.interactor.verified_addresses.sol_addresses) {
+    if (isValid && !message.following) {
+        return new NextResponse(getFrameHtmlResponse({
+            image: {
+                src: `${baseURL}/error.jpg`
+            },
+            buttons: [
+                {
+                  label: "You need to be following to mint! Click to retry",
+                  action: "post",
+                },
+            ],
+            postUrl: `${baseURL}api/frames`,
+        }));
+    } else if (isValid && message.interactor.verified_addresses.sol_addresses) {
         const solanaAddresses = message.interactor.verified_addresses.sol_addresses;
         console.log(`SOLANA ADDRESSES: ${solanaAddresses}`); 
 
