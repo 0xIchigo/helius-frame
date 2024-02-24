@@ -14,7 +14,7 @@ const frameMetadata = getFrameMetadata({
       action: "post",
     },
   ],
-  postUrl: `${baseURL}/api/frames/route`,
+  postUrl: `${baseURL}api/frames/route`,
 });
 
 export const metadata: Metadata = {
