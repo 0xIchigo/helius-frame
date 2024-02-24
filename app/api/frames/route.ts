@@ -12,7 +12,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         neynarApiKey: "NEYNAR_ONCHAIN_KIT",
     });
 
-    if (isValid && message.interactor.verified_accounts.length > 0) {
+    if (isValid && message.interactor.verified_addresses.sol_addresses) {
         const solanaAddresses = message.interactor.verified_addresses.sol_addresses; 
 
         if (solanaAddresses) {
