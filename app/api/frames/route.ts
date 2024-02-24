@@ -16,7 +16,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         const solanaAddresses = message.interactor.verified_addresses.sol_addresses;
         console.log(`SOLANA ADDRESSES: ${solanaAddresses}`); 
 
-        if (solanaAddresses) {
+        if (solanaAddresses.length !== 0) {
             try {
                 console.log(`MINTING to ${solanaAddresses[0]}`);
                 const mintResult = await mintCompressedNFT(solanaAddresses[0]!);
@@ -26,10 +26,7 @@ export async function POST(req: NextRequest): Promise<Response> {
                     },
                     buttons: [
                         {
-                            label: `Successfully minted ${mintResult.assetId} to ${solanaAddresses[0]}`,
-                        },
-                        {
-                            label: "View your cNFT on XRAY",
+                            label: "Success! View your cNFT on XRAY",
                             action: "link",
                             target: `https://xray.helius.xyz/token/${mintResult.assetId}?network=mainnet`
                         },
@@ -43,7 +40,7 @@ export async function POST(req: NextRequest): Promise<Response> {
                     },
                     buttons: [
                         {
-                          label: "Minting failed. Retry?",
+                          label: "Minting failed. Click to retry",
                           action: "post",
                         },
                     ],
@@ -58,30 +55,13 @@ export async function POST(req: NextRequest): Promise<Response> {
                 },
                 buttons: [
                     {
-                      label: "No Solana address found. Retry?",
+                      label: "No Solana address found. Click to retry",
                       action: "post",
                     },
                 ],
                 postUrl: `${baseURL}api/frames`
             }));
         }
-    } else if (message?.interactor.verified_accounts.length === 0){
-        console.log(JSON.stringify(message?.interactor, null, 2));
-        return new NextResponse(getFrameHtmlResponse({
-            image: {
-                src: `${baseURL}/error.jpg`
-            },
-            buttons: [
-                {
-                  label: "No verified addresses found. Retry?",
-                  action: "post",
-                },
-                {
-                    label: `${JSON.stringify(message?.interactor, null, 2)}`,
-                },
-            ],
-            postUrl: `${baseURL}api/frames`,
-        }));
     } else {
         return new NextResponse(getFrameHtmlResponse({
             image: {
@@ -89,7 +69,7 @@ export async function POST(req: NextRequest): Promise<Response> {
             }, 
             buttons: [
                 {
-                  label: "Invalid frame message. Retry?",
+                  label: "Invalid frame message. Click to retry",
                   action: "post",
                 },
             ],
