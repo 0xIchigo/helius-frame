@@ -13,19 +13,18 @@ export async function POST(req: NextRequest): Promise<Response> {
     });
 
     if (isValid && message.interactor.verified_accounts.length > 0) {
-        const solanaAddresses = message.interactor.verified_accounts.filter(address => !address.startsWith("0x") || (address.startsWith("0x") && address.length !== 42)); 
-        const firstSolanaAddress = solanaAddresses.length > 0 ? solanaAddresses[0] : null;
+        const solanaAddresses = message.interactor.verified_addresses.sol_addresses; 
 
-        if (firstSolanaAddress) {
+        if (solanaAddresses) {
             try {
-                const mintResult = await mintCompressedNFT(firstSolanaAddress);
+                const mintResult = await mintCompressedNFT(solanaAddresses[0]!);
                 return new NextResponse(getFrameHtmlResponse({
                     image: {
                         src: `${baseURL}/success.jpg`
                     },
                     buttons: [
                         {
-                            label: `Successfully minted ${mintResult.assetId} to ${firstSolanaAddress}`,
+                            label: `Successfully minted ${mintResult.assetId} to ${solanaAddresses[0]}`,
                         },
                         {
                             label: "View your cNFT on XRAY",
