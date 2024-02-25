@@ -18,7 +18,8 @@ export async function POST(req: NextRequest): Promise<Response> {
     if (isValid && !message.following) {
         return new NextResponse(getFrameHtmlResponse({
             image: {
-                src: `${baseURL}/error.jpg`
+                src: `${baseURL}/error.jpg`,
+                aspectRatio: "1:1",
             },
             buttons: [
                 {
@@ -41,7 +42,8 @@ export async function POST(req: NextRequest): Promise<Response> {
                 
                 return new NextResponse(getFrameHtmlResponse({
                     image: {
-                        src: `${baseURL}/success.jpg`
+                        src: `${baseURL}/success.jpg`,
+                        aspectRatio: "1:1",
                     },
                     buttons: [
                         {
@@ -55,7 +57,8 @@ export async function POST(req: NextRequest): Promise<Response> {
                 console.log(`Minting failed: ${e}`);
                 return new NextResponse(getFrameHtmlResponse({
                     image: {
-                        src: `${baseURL}/error.jpg`
+                        src: `${baseURL}/error.jpg`,
+                        aspectRatio: "1:1",
                     },
                     buttons: [
                         {
@@ -70,7 +73,8 @@ export async function POST(req: NextRequest): Promise<Response> {
             console.log(`No Solana address found`);
             return new NextResponse(getFrameHtmlResponse({
                 image: {
-                    src: `${baseURL}/error.jpg`
+                    src: `${baseURL}/error.jpg`,
+                    aspectRatio: "1:1",
                 },
                 buttons: [
                     {
@@ -84,7 +88,8 @@ export async function POST(req: NextRequest): Promise<Response> {
     } else {
         return new NextResponse(getFrameHtmlResponse({
             image: {
-                src: `${baseURL}/error.jpg`
+                src: `${baseURL}/error.jpg`,
+                aspectRatio: "1:1",
             }, 
             buttons: [
                 {
