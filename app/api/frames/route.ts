@@ -15,7 +15,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     console.log(JSON.stringify(message, null, 2));
 
     // Make sure they're following us before they can mint the cNFT
-    if (isValid && !message.following) {
+    if (isValid && message.following) {
         return new NextResponse(getFrameHtmlResponse({
             image: {
                 src: `${baseURL}/error.jpg`,
