@@ -15,7 +15,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     console.log(JSON.stringify(message, null, 2));
 
     // Make sure they're following us before they can mint the cNFT
-    if (isValid && message.following) {
+    if (isValid && !message.following) {
         return new NextResponse(getFrameHtmlResponse({
             image: {
                 src: `${baseURL}/error.jpg`,
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         const solanaAddresses = message.interactor.verified_addresses.sol_addresses;
         console.log(`SOLANA ADDRESSES: ${solanaAddresses}`); 
 
-        if (solanaAddresses.length === 0) {
+        if (solanaAddresses.length !== 0) {
             try {
                 console.log(`MINTING to ${solanaAddresses[0]}`);
                 // We take the first address address, in case there's more than one
