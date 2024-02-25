@@ -32,8 +32,14 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <>
-      <h1>Mint a cNFT!</h1>
-    </>
+    <div className="flex h-screen justify-center items-center">
+      <h1>Mint a cNFT on Farcaster using the Helius Mint API</h1>
+      <div>
+        <a href="https://twitter.com/0xIchigo" className="block">Built by 0xIchigo</a>
+      </div>
+      <div>
+        <a href="https://github.com/0xIchigo/helius-frame" className="block">GitHub Repo</a>
+      </div>
+    </div>
   );
 }
