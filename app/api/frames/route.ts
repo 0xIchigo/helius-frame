@@ -14,6 +14,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 
     console.log(JSON.stringify(message, null, 2));
 
+    // Make sure they're following us before they can mint the cNFT
     if (isValid && !message.following) {
         return new NextResponse(getFrameHtmlResponse({
             image: {
@@ -27,6 +28,7 @@ export async function POST(req: NextRequest): Promise<Response> {
             ],
             postUrl: `${baseURL}api/frames`,
         }));
+    // Make sure they have a verified Solana address
     } else if (isValid && message.interactor.verified_addresses.sol_addresses) {
         const solanaAddresses = message.interactor.verified_addresses.sol_addresses;
         console.log(`SOLANA ADDRESSES: ${solanaAddresses}`); 
@@ -34,7 +36,9 @@ export async function POST(req: NextRequest): Promise<Response> {
         if (solanaAddresses.length !== 0) {
             try {
                 console.log(`MINTING to ${solanaAddresses[0]}`);
+                // We take the first address address, in case there's more than one
                 const mintResult = await mintCompressedNFT(solanaAddresses[0]!);
+                
                 return new NextResponse(getFrameHtmlResponse({
                     image: {
                         src: `${baseURL}/success.jpg`
@@ -47,7 +51,7 @@ export async function POST(req: NextRequest): Promise<Response> {
                         },
                     ],
                 }));
-            } catch (e) {
+            } catch (e: any) {
                 console.log(`Minting failed: ${e}`);
                 return new NextResponse(getFrameHtmlResponse({
                     image: {

@@ -6,7 +6,7 @@ const baseURL = "https://helius-frame.vercel.app/";
 const frameMetadata = getFrameMetadata({
   image: {
     src: `${baseURL}/default.jpg`,
-    aspectRatio: "1.91:1",
+    aspectRatio: "1:1",
   },
   buttons: [
     {
