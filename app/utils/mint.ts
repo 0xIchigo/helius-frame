@@ -11,21 +11,21 @@ export const mintCompressedNFT = async (address: string) => {
             id: "frames-sol-mint",
             method: "mintCompressedNft",
             params: {
-                name: "Helius Customer Support",
-                symbol: "HCS",
+                name: "Solana Soldier",
+                symbol: "HELIUS",
                 owner: address,
-                description: "24/7 priority support for Solana's most loved RPC Nodes, APIs, Webhooks, and Developer Tooling",
+                description: "A decentralized warrior backed by Solana's most loved RPC Nodes, APIs, Webhooks, and Developer Tooling",
                 attributes: [
                     {
-                        trait_type: "Support",
-                        value: "Legendary",
+                        trait_type: "RPCs",
+                        value: "Fast",
                     },
                     {
                         trait_type: "Company",
                         value: "Helius"
                     },
                 ],
-                imageUrl: "https://shdw-drive.genesysgo.net/HmvVwYAy7cxWECLbu2cjWBSHysVoriTqgdugyePVg3rY/helius-customer-support.jpg",
+                imageUrl: "https://shdw-drive.genesysgo.net/HmvVwYAy7cxWECLbu2cjWBSHysVoriTqgdugyePVg3rY/cnftmint.jpg",
                 externalUrl: "https://www.helius.dev/",
                 sellerFeeBasisPoints: 6900,
             },
